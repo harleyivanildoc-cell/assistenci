@@ -1,0 +1,465 @@
+
+/* Estilos do projeto Espaco Acessivel */
+
+:root {
+    --fundo: #f3f7fc;
+    --branco: #ffffff;
+    --texto: #172b4d;
+    --suave: #53657d;
+    --azul: #0866c6;
+    --azul-escuro: #064a91;
+    --borda: #d9e3ef;
+}
+
+/* Configuracoes gerais */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Links e botoes */
+a {
+    color: var(--azul-escuro);
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #ffbf47;
+    outline-offset: 3px;
+}
+
+/* Organizacao principal da pagina */
+.app-container {
+    display: grid;
+    grid-template-columns: 245px minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+/* Menu lateral */
+.barra-lateral,
+aside {
+    background: #102c4d;
+    color: white;
+    padding: 25px 18px;
+}
+
+.barra-lateral nav,
+aside nav {
+    display: grid;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.barra-lateral nav a,
+aside nav a {
+    color: white;
+    text-decoration: none;
+    padding: 11px;
+    border-radius: 8px;
+}
+
+.barra-lateral nav a:hover,
+aside nav a:hover {
+    background: #244b73;
+}
+
+/* Area principal */
+main {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 35px;
+}
+
+header {
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 27px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+p {
+    color: var(--suave);
+}
+
+/* Paineis e cartoes */
+.cartao,
+.painel-ia,
+.ia-info {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(25, 55, 90, 0.06);
+}
+
+/* Botoes */
+button,
+.botao {
+    background: var(--azul);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button:hover,
+.botao:hover {
+    background: var(--azul-escuro);
+}
+
+/* Botoes de acessibilidade */
+.controles-topo,
+.controles-acessibilidade {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.controles-topo button,
+.controles-acessibilidade button {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* Campos de formulario */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #aebed0;
+    border-radius: 8px;
+    font: inherit;
+    margin-top: 6px;
+    margin-bottom: 14px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Secoes da pagina */
+.secao {
+    margin-top: 40px;
+}
+
+.grelha-servicos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* Mensagens de estado */
+.estado,
+#status-ia {
+    background: #eef5fc;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 12px;
+}
+
+/* Camera */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 20px auto;
+    background: #081522;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#webcam {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+#canvas-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Imagens */
+.previa-imagem {
+    display: block;
+    max-width: 100%;
+    max-height: 350px;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.escondido {
+    display: none !important;
+}
+
+/* Organizacao de botoes */
+.linha-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.secundario {
+    background: #e6f1ff;
+    color: #064a91;
+    border: 1px solid #bfd9f3;
+}
+
+.secundario:hover {
+    background: #cfe5ff;
+    color: #064a91;
+}
+
+/* Aviso de seguranca */
+.aviso-seguranca {
+    background: #fff4d8;
+    color: #4e3c13;
+    border-left: 5px solid #c88a00;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* Rodape */
+footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid var(--borda);
+}
+
+/* Alto contraste */
+body.alto-contraste {
+    background: #000000;
+    color: #ffffff;
+}
+
+body.alto-contraste aside,
+body.alto-contraste .barra-lateral {
+    background: #000000;
+    border-right: 2px solid #ffffff;
+}
+
+body.alto-contraste .cartao,
+body.alto-contraste .painel-ia,
+body.alto-contraste .ia-info {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+body.alto-contraste p,
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3 {
+    color: #ffffff;
+}
+
+body.alto-contraste a {
+    color: #ffeb00;
+}
+
+body.alto-contraste button {
+    background: #ffeb00;
+    color: #000000;
+}
+
+body.alto-contraste input,
+body.alto-contraste textarea {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+/* Destaque da navegacao por teclado */
+.modo-teclado a:focus,
+.modo-teclado button:focus,
+.modo-teclado input:focus,
+.modo-teclado textarea:focus {
+    outline: 4px solid #ffbf47;
+    outline-offset: 4px;
+}
+
+/* Adaptacao para tablets */
+@media (max-width: 900px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .barra-lateral,
+    aside {
+        padding: 15px;
+    }
+
+    .barra-lateral nav,
+    aside nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 12px;
+    }
+
+    main {
+        padding: 22px;
+    }
+}
+
+/* Adaptacao para telemoveis */
+@media (max-width: 600px) {
+    main {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    .grelha-servicos {
+        grid-template-columns: 1fr;
+    }
+
+    .linha-botoes {
+        flex-direction: column;
+    }
+
+    .linha-botoes button {
+        width: 100%;
+    }
+
+    .cartao,
+    .painel-ia,
+    .ia-info {
+        padding: 16px;
+    }
+}
+
+/* Respeitar a preferencia por menos animacoes */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+
+
+/* Aqui organizo a caixa de escolha do idioma */
+.seletor-idioma {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+/* Aqui estilizo a caixa de seleção */
+.seletor-idioma select {
+    padding: 10px;
+    border: 1px solid #0b806b;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 16px;
+}
+
+/* Aqui estilizo os botões de áudio */
+.conteudo-idioma button {
+    padding: 10px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    background-color: #087f68;
+    color: white;
+    cursor: pointer;
+}
+
+/* Aqui mudo a cor do botão quando o rato passa por cima */
+.conteudo-idioma button:hover {
+    background-color: #055b4b;
+}
+
+/* Aqui dou espaço ao conteúdo */
+.conteudo-idioma {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #f2f8f6;
+}
+
+/* Aqui organizo a escolha do idioma no cabeçalho. */
+.seletor-idioma {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Aqui estilizo a caixa para escolher o idioma. */
+.seletor-idioma select {
+    padding: 10px;
+    border: 1px solid #087f68;
+    border-radius: 8px;
+    background-color: white;
+    color: #222;
+    font-size: 15px;
+    max-width: 100%;
+}
+
+/* Aqui organizo a área de leitura por voz. */
+.conteudo-idioma {
+    margin: 20px 0;
+    padding: 20px;
+}
+
+/* Aqui dou espaço aos botões da área de leitura. */
+.conteudo-idioma button {
+    margin: 5px;
+}
+
+/* Aqui garanto que o áudio não ultrapasse o cartão. */
+.conteudo-idioma audio {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 12px;
+}
+

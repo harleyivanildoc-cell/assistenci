@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <!-- Define os caracteres e adapta a página ao tamanho do ecrã. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Descrição do projeto para os motores de pesquisa. -->
+    <meta name="description" content="Espaço Acessível: ferramentas digitais de apoio à autonomia e inclusão.">
+
+    <!-- Título que aparece na aba do navegador. -->
+    <title>Assistente — Espaço Acessível</title>
+
+    <!-- Liga o ficheiro CSS responsável pelo design da página. -->
+    <link rel="stylesheet" href="primeiro.css">
+
+    <!-- Biblioteca para reconhecer texto em fotografias (OCR). -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js" defer></script>
+
+    <!-- Biblioteca necessária para o funcionamento da inteligência artificial. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js" defer></script>
+
+    <!-- Modelo que tenta identificar objetos através da câmara. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3/dist/coco-ssd.min.js" defer></script>
+
+    <!-- Liga o JavaScript que controla as funções do site. -->
+    <script src="primeiro.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Link que permite saltar o menu e ir diretamente ao conteúdo principal. -->
+    <a class="pular" href="#conteudo-principal">
+        Saltar para o conteúdo principal
+    </a>
+
+    <!-- Caixa principal que contém o menu lateral e o conteúdo do site. -->
+    <div class="app-container">
+
+        <!-- MENU LATERAL -->
+        <aside class="barra-lateral" aria-label="Menu principal">
+
+            <!-- Logótipo e nome do projeto. -->
+            <div class="marca">
+                <span class="marca-icone" aria-hidden="true">✦</span>
+
+                <div>
+                    <strong>Assistente</strong>
+                    <small>Espaço Acessível</small>
+                </div>
+            </div>
+
+            <!-- Links que permitem navegar pelas diferentes secções. -->
+            <nav>
+                <a href="#inicio">Início</a>
+                <a href="#leitor">Leitor de texto</a>
+                <a href="#rua">Assistente de rua</a>
+                <a href="#voz">Comandos de voz</a>
+                <a href="#servicos">Serviços e direitos</a>
+                <a href="#ajuda">Pedir ajuda</a>
+                <a href="#acessibilidade">Acessibilidade</a>
+                <a href="#sobre">Sobre nós</a>
+            </nav>
+
+            <!-- Pequena mensagem apresentada no menu. -->
+            <p class="nota-lateral">
+                Uma ferramenta de apoio à autonomia e à inclusão.
+            </p>
+            
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main id="conteudo-principal">
+
+            <!-- CABEÇALHO -->
+            <header class="topo">
+
+                <div>
+                    <p class="sobretitulo">TECNOLOGIA PARA TODOS</p>
+
+                    <!-- Título principal da página. -->
+                    <h1 id="inicio">Mais autonomia. Mais acessibilidade.</h1>
+
+                    <p class="subtitulo">
+                        Ferramentas digitais simples para apoiar pessoas com diferentes necessidades.
+                    </p>
+                </div>
+
+                <!-- Botões que permitem alterar a apresentação do site. -->
+                <div class="controles-topo" aria-label="Controlos de acessibilidade">
+
+                    <!-- Diminui o tamanho do texto. -->
+                    <button id="btn-diminuir" type="button"
+                        aria-label="Diminuir tamanho do texto">A−</button>
+
+                    <!-- Aumenta o tamanho do texto. -->
+                    <button id="btn-aumentar" type="button"
+                        aria-label="Aumentar tamanho do texto">A+</button>
+
+                    <!-- Ativa ou desativa o alto contraste. -->
+                    <button id="btn-alto-contraste" type="button"
+                        aria-pressed="false">Alto contraste</button>
+
+                </div>
+            </header>
+
+            <!-- AVISO DE SEGURANÇA -->
+            <section class="aviso-seguranca" aria-label="Aviso de segurança">
+                <strong>Importante:</strong>
+                estas ferramentas são apoio complementar. A deteção de objetos pode falhar
+                e não substitui bengala, cão-guia, acompanhante, sinais de trânsito ou atenção ao ambiente.
+            </section>
+
+            <!-- CARTÃO DE BOAS-VINDAS -->
+            <section class="cartao destaque" aria-labelledby="boas-vindas">
+
+                <div>
+                    <span class="etiqueta">ESPAÇO INCLUSIVO</span>
+
+                    <h2 id="boas-vindas">
+                        A acessibilidade começa com pequenas soluções.
+                    </h2>
+
+                    <p>
+                        Leia textos com a câmara, explore recursos de apoio,
+                        use comandos de voz ou envie um pedido de ajuda.
+                    </p>
+
+                    <!-- Este link leva o utilizador ao leitor de texto. -->
+                    <a class="botao" href="#leitor">Experimentar ferramentas</a>
+                </div>
+
+                <!-- Espaço reservado para uma ilustração decorativa. -->
+                <div class="ilustracao" aria-hidden="true"></div>
+
+            </section>
+
+            <!-- LEITOR DE TEXTO -->
+            <section id="leitor" class="secao" aria-labelledby="titulo-leitor">
+
+                <div class="cabecalho-secao">
+                    <div>
+                        <p class="sobretitulo">PARA BAIXA VISÃO E CEGUEIRA</p>
+
+                        <h2 id="titulo-leitor">Leitor de texto pela câmara</h2>
+
+                        <p>
+                            Fotografe um aviso, documento ou embalagem.
+                            O sistema tentará reconhecer o texto e poderá lê-lo em voz alta.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="cartao">
+
+                    <!-- Campo para escolher uma fotografia do dispositivo ou tirar uma foto. -->
+                    <label for="imagem-texto" class="campo-label">
+                        Escolher uma fotografia
+                    </label>
+
+                    <input id="imagem-texto" type="file"
+                        accept="image/*" capture="environment">
+
+                    <!-- Botões para reconhecer, ler e parar a leitura do texto. -->
+                    <div class="linha-botoes">
+
+                        <button id="btn-ler-imagem" class="botao" type="button">
+                            Reconhecer texto
+                        </button>
+
+                        <button id="btn-falar-texto" class="botao secundario"
+                            type="button" disabled>
+                            Ler em voz alta
+                        </button>
+
+                        <button id="btn-parar-voz" class="botao discreto" type="button">
+                            Parar leitura
+                        </button>
+
+                    </div>
+
+                    <!-- Mostra mensagens sobre o estado do reconhecimento. -->
+                    <p id="estado-ocr" class="estado" role="status" aria-live="polite">
+                        Selecione uma imagem nítida e com boa iluminação.
+                    </p>
+
+                    <!-- Apresenta uma pré-visualização da imagem escolhida. -->
+                    <img id="previa-imagem" class="previa-imagem escondido"
+                        alt="Pré-visualização da imagem escolhida">
+
+                    <!-- Área onde aparece o texto reconhecido. O utilizador também pode editá-lo. -->
+                    <label for="texto-reconhecido" class="campo-label">
+                        Texto reconhecido (pode editar)
+                    </label>
+
+                    <textarea id="texto-reconhecido" rows="5"
+                        placeholder="O texto reconhecido aparecerá aqui. Também pode escrever ou colar um texto para o ouvir."></textarea>
+
+                    <!-- Lê em voz alta o texto escrito na área acima. -->
+                    <button id="btn-ler-escrito" class="botao secundario" type="button">
+                        Ler texto escrito
+                    </button>
+
+                </div>
+            </section>
+
+            <!-- ASSISTENTE DE VISÃO URBANA -->
+            <section id="rua" class="secao" aria-labelledby="titulo-rua">
+
+                <p class="sobretitulo">APOIO VISUAL EXPERIMENTAL</p>
+
+                <h2 id="titulo-rua">Assistente de visão urbana</h2>
+
+                <p>
+                    Usa a câmara para tentar identificar alguns objetos conhecidos e anunciá-los por voz.
+                </p>
+
+                <div class="cartao">
+
+                    <!-- Botões para ligar e desligar a câmara. -->
+                    <div class="linha-botoes">
+
+                        <button id="btn-camera" class="botao" type="button">
+                            Ativar câmara
+                        </button>
+
+                        <button id="btn-parar-camera" class="botao secundario"
+                            type="button" disabled>
+                            Parar câmara
+                        </button>
+
+                    </div>
+
+                    <!-- Apresenta o estado da câmara e da deteção de objetos. -->
+                    <p id="status-ia" class="estado" role="status" aria-live="polite">
+                        Câmara desligada. A deteção depende da iluminação e do dispositivo.
+                    </p>
+
+                    <div class="video-container">
+
+                        <!-- Mostra a imagem captada pela câmara. -->
+                        <video id="webcam" autoplay muted playsinline
+                            aria-label="Imagem da câmara"></video>
+
+                        <!-- Permite desenhar marcações sobre a imagem da câmara. -->
+                        <canvas id="canvas-overlay" aria-hidden="true"></canvas>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- COMANDOS DE VOZ -->
+            <section id="voz" class="secao" aria-labelledby="titulo-voz">
+
+                <p class="sobretitulo">MÃOS-LIVRES</p>
+
+                <h2 id="titulo-voz">Comandos de voz</h2>
+
+                <div class="cartao">
+
+                    <p>
+                        Se o navegador suportar reconhecimento de voz, toque no botão
+                        e diga, por exemplo, “abrir leitor”, “abrir serviços”,
+                        “pedir ajuda” ou “ler página”.
+                    </p>
+
+                    <!-- Inicia o reconhecimento de voz quando o JavaScript o suporta. -->
+                    <button id="btn-comando-voz" class="botao" type="button">
+                        🎙️ Iniciar comando de voz
+                    </button>
+
+                    <!-- Apresenta o resultado ou o estado do comando de voz. -->
+                    <p id="estado-voz" class="estado" role="status" aria-live="polite">
+                        Aguarda comando.
+                    </p>
+
+                    <p class="texto-pequeno">
+                        O reconhecimento de voz depende do navegador,
+                        da ligação à internet e das permissões concedidas.
+                    </p>
+
+                </div>
+            </section>
+
+            <!-- SERVIÇOS, DIREITOS E RECURSOS -->
+            <section id="servicos" class="secao" aria-labelledby="titulo-servicos">
+
+                <p class="sobretitulo">INFORMAÇÃO E APOIO</p>
+
+                <h2 id="titulo-servicos">Serviços, direitos e recursos</h2>
+
+                <p>
+                    Use estas sugestões para saber por onde começar.
+                    Confirme sempre os contactos, horários e requisitos diretamente com cada instituição.
+                </p>
+
+                <!-- Grelha de cartões com diferentes áreas de apoio. -->
+                <div class="grelha-servicos">
+
+                    <!-- Cartão sobre direitos e documentação. -->
+                    <article class="cartao servico">
+                        <span class="servico-icone" aria-hidden="true">⚖</span>
+                        <h3>Direitos e documentação</h3>
+
+                        <p>
+                            Procure os serviços públicos competentes ou organizações
+                            de defesa dos direitos das pessoas com deficiência.
+                        </p>
+
+                        <a href="https://www.google.com/search?q=Mo%C3%A7ambique+direitos+pessoas+com+defici%C3%AAncia+servi%C3%A7os+oficiais"
+                            target="_blank" rel="noopener noreferrer">
+                            Pesquisar recursos oficiais
+                        </a>
+                    </article>
+
+                    <!-- Cartão sobre educação inclusiva. -->
+                    <article class="cartao servico">
+                        <span class="servico-icone" aria-hidden="true">🎓</span>
+                        <h3>Educação inclusiva</h3>
+
+                        <p>
+                            Converse com a escola sobre materiais acessíveis,
+                            adaptações, apoio individual e tecnologias assistivas.
+                        </p>
+
+                        <a href="https://www.google.com/search?q=Mo%C3%A7ambique+educa%C3%A7%C3%A3o+inclusiva+defici%C3%AAncia"
+                            target="_blank" rel="noopener noreferrer">
+                            Encontrar informação
+                        </a>
+                    </article>
+
+                    <!-- Cartão sobre emprego e formação profissional. -->
+                    <article class="cartao servico">
+                        <span class="servico-icone" aria-hidden="true">💼</span>
+                        <h3>Emprego e formação</h3>
+
+                        <p>
+                            Pesquise oportunidades de formação profissional
+                            e emprego inclusivo.
+                        </p>
+
+                        <a href="https://www.google.com/search?q=Mo%C3%A7ambique+emprego+inclusivo+pessoas+com+defici%C3%AAncia"
+                            target="_blank" rel="noopener noreferrer">
+                            Pesquisar oportunidades
+                        </a>
+                    </article>
+
+                    <!-- Cartão sobre associações e apoio comunitário. -->
+                    <article class="cartao servico">
+                        <span class="servico-icone" aria-hidden="true">🤝</span>
+                        <h3>Associações e apoio local</h3>
+
+                        <p>
+                            Associações de pessoas com deficiência podem orientar
+                            sobre serviços, acessibilidade, formação e apoio comunitário.
+                        </p>
+
+                        <a href="https://www.google.com/search?q=associa%C3%A7%C3%B5es+pessoas+com+defici%C3%AAncia+Mo%C3%A7ambique"
+                            target="_blank" rel="noopener noreferrer">
+                            Pesquisar associações
+                        </a>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- PEDIR AJUDA -->
+            <section id="ajuda" class="secao" aria-labelledby="titulo-ajuda">
+
+                <p class="sobretitulo">CONTACTO DE CONFIANÇA</p>
+
+                <h2 id="titulo-ajuda">Pedir ajuda</h2>
+
+                <div class="cartao">
+
+                    <p>
+                        Preencha os dados para preparar uma mensagem para uma pessoa
+                        de confiança. A página não envia a mensagem sem a sua confirmação.
+                    </p>
+
+                    <!-- Campo para escrever o número de WhatsApp da pessoa de confiança. -->
+                    <label class="campo-label" for="contacto-ajuda">
+                        Número de WhatsApp da pessoa de confiança
+                    </label>
+
+                    <input id="contacto-ajuda" type="tel" inputmode="tel"
+                        placeholder="Ex.: 2588XXXXXXXX">
+
+                    <!-- Campo para escrever a mensagem de ajuda. -->
+                    <label class="campo-label" for="mensagem-ajuda">Mensagem</label>
+
+                    <textarea id="mensagem-ajuda" rows="3">Preciso de ajuda. Pode entrar em contacto comigo, por favor?</textarea>
+
+                    <div class="linha-botoes">
+
+                        <!-- Solicita autorização para obter a localização atual. -->
+                        <button id="btn-localizacao" class="botao secundario" type="button">
+                            Anexar a minha localização
+                        </button>
+
+                        <!-- Prepara a mensagem e abre o WhatsApp para confirmação. -->
+                        <button id="btn-enviar-ajuda" class="botao alerta" type="button">
+                            Preparar pedido no WhatsApp
+                        </button>
+
+                    </div>
+
+                    <!-- Informa o utilizador sobre o estado do pedido de ajuda. -->
+                    <p id="estado-ajuda" class="estado" role="status" aria-live="polite">
+                        A localização só será obtida se autorizar no navegador.
+                    </p>
+
+                    <p class="texto-pequeno">
+                        Em perigo imediato, procure também os serviços de emergência locais
+                        ou alguém próximo. Esta página não é um serviço de emergência.
+                    </p>
+
+                </div>
+            </section>
+
+            <!-- MAPA E ORIENTAÇÃO -->
+            <section id="mapa" class="secao" aria-labelledby="titulo-mapa">
+
+                <p class="sobretitulo">ORIENTAÇÃO</p>
+
+                <h2 id="titulo-mapa">Encontrar um percurso</h2>
+
+                <div class="cartao">
+
+                    <p>
+                        Abra um serviço de mapas para procurar um destino e planear
+                        o percurso. Confirme a acessibilidade do trajeto antes de sair.
+                    </p>
+
+                    <!-- Campo para escrever o destino pretendido. -->
+                    <label class="campo-label" for="destino">Destino</label>
+
+                    <input id="destino" type="text"
+                        placeholder="Ex.: hospital, escola ou paragem">
+
+                    <div class="linha-botoes">
+
+                        <!-- Pesquisa o destino num serviço de mapas. -->
+                        <button id="btn-mapa" class="botao" type="button">
+                            Pesquisar destino no mapa
+                        </button>
+
+                        <!-- Tenta usar a localização atual do utilizador. -->
+                        <button id="btn-mapa-local" class="botao secundario" type="button">
+                            Usar localização atual
+                        </button>
+
+                    </div>
+
+                    <!-- Mostra mensagens relacionadas com a localização. -->
+                    <p id="estado-mapa" class="estado" role="status" aria-live="polite">
+                        A localização é opcional e requer autorização.
+                    </p>
+
+                </div>
+            </section>
+
+            <!-- PAINEL DE ACESSIBILIDADE -->
+            <section id="acessibilidade" class="secao"
+                aria-labelledby="titulo-acessibilidade">
+
+                <p class="sobretitulo">PERSONALIZAR</p>
+
+                <h2 id="titulo-acessibilidade">Painel de acessibilidade</h2>
+
+                <div class="grelha-servicos">
+
+                    <!-- Recursos para pessoas com baixa visão. -->
+                    <article class="cartao">
+                        <h3>Para baixa visão</h3>
+                        <p>Aumente o texto, use alto contraste e aproveite a leitura em voz alta.</p>
+
+                        <button id="btn-foco-contraste" class="botao secundario" type="button">
+                            Ativar alto contraste
+                        </button>
+                    </article>
+
+                    <!-- Recursos visuais para pessoas com deficiência auditiva. -->
+                    <article class="cartao">
+                        <h3>Para pessoas surdas ou com deficiência auditiva</h3>
+
+                        <p>
+                            Os avisos importantes aparecem também em texto.
+                            Ative legendas ou transcrição nas aplicações que utilizar.
+                        </p>
+
+                        <!-- Mostra um aviso visual para testar a função. -->
+                        <button id="btn-alerta-visual" class="botao secundario" type="button">
+                            Testar alerta visual
+                        </button>
+
+                        <p id="alerta-visual" class="estado" role="status" aria-live="polite">
+                            Os avisos visuais serão apresentados aqui.
+                        </p>
+                    </article>
+
+                    <!-- Orientações para pessoas com mobilidade reduzida. -->
+                    <article class="cartao">
+                        <h3>Para mobilidade reduzida</h3>
+
+                        <p>
+                            Use Tab para navegar e Enter ou Espaço para ativar os controlos.
+                        </p>
+
+                        <!-- Ativa um destaque visual para a navegação pelo teclado. -->
+                        <button id="btn-modo-teclado" class="botao secundario" type="button">
+                            Destacar navegação por teclado
+                        </button>
+                    </article>
+
+                    <!-- Funções que facilitam a leitura do conteúdo. -->
+                    <article class="cartao">
+                        <h3>Para leitura facilitada</h3>
+
+                        <p>
+                            Use frases curtas, botões claros e leitura por voz.
+                        </p>
+
+                        <!-- Lê um resumo da página através da função JavaScript. -->
+                        <button id="btn-ler-pagina" class="botao secundario" type="button">
+                            Ler resumo da página
+                        </button>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- SOBRE O PROJETO -->
+            <section id="sobre" class="secao" aria-labelledby="titulo-sobre">
+
+                <div class="cartao">
+                    <h2 id="titulo-sobre">Sobre o Espaço Acessível</h2>
+
+                    <p>
+                        Este projeto pretende aproximar a tecnologia das necessidades
+                        de pessoas com deficiência. As ferramentas são demonstrativas
+                        e devem ser testadas com utilizadores reais antes de serem
+                        usadas como apoio em situações de risco.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- RODAPÉ: aparece no final da página. -->
+            <footer>
+                <p>Espaço Acessível · Inclusão, autonomia e respeito.</p>
+
+                <!-- Link para voltar ao início da página. -->
+                <a href="#inicio">Voltar ao início ↑</a>
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+</html>
